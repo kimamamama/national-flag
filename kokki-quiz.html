@@ -7,9 +7,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka+One&display=swap');
 
-  :root {
-    --shadow: rgba(0,0,0,0.15);
-  }
+  :root { --shadow: rgba(0,0,0,0.15); }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -20,223 +18,184 @@
     overflow-x: hidden;
   }
 
-  /* 背景の雲 */
+  /* 雲 */
   .cloud {
-    position: fixed;
-    background: white;
-    border-radius: 50px;
-    opacity: 0.7;
-    pointer-events: none;
-    z-index: 0;
+    position: fixed; background: white; border-radius: 50px;
+    opacity: 0.7; pointer-events: none; z-index: 0;
   }
   .cloud::before, .cloud::after {
-    content: '';
-    position: absolute;
-    background: white;
-    border-radius: 50%;
+    content: ''; position: absolute; background: white; border-radius: 50%;
   }
-  .cloud1 { width: 120px; height: 40px; top: 8%; left: 5%; animation: drift 18s linear infinite; }
-  .cloud1::before { width: 60px; height: 55px; top: -30px; left: 15px; }
-  .cloud1::after  { width: 45px; height: 45px; top: -20px; left: 50px; }
-  .cloud2 { width: 90px; height: 30px; top: 20%; right: 8%; animation: drift 24s linear infinite reverse; }
-  .cloud2::before { width: 45px; height: 40px; top: -22px; left: 12px; }
-  .cloud2::after  { width: 35px; height: 35px; top: -16px; left: 38px; }
-  .cloud3 { width: 100px; height: 35px; bottom: 15%; left: 12%; animation: drift 20s linear infinite; animation-delay: -8s; }
-  .cloud3::before { width: 50px; height: 45px; top: -25px; left: 15px; }
-  .cloud3::after  { width: 38px; height: 38px; top: -18px; left: 44px; }
+  .cloud1 { width:120px; height:40px; top:8%; left:5%; animation: drift 18s linear infinite; }
+  .cloud1::before { width:60px; height:55px; top:-30px; left:15px; }
+  .cloud1::after  { width:45px; height:45px; top:-20px; left:50px; }
+  .cloud2 { width:90px; height:30px; top:20%; right:8%; animation: drift 24s linear infinite reverse; }
+  .cloud2::before { width:45px; height:40px; top:-22px; left:12px; }
+  .cloud2::after  { width:35px; height:35px; top:-16px; left:38px; }
+  .cloud3 { width:100px; height:35px; bottom:15%; left:12%; animation: drift 20s linear infinite; animation-delay:-8s; }
+  .cloud3::before { width:50px; height:45px; top:-25px; left:15px; }
+  .cloud3::after  { width:38px; height:38px; top:-18px; left:44px; }
 
   @keyframes drift {
     0%   { transform: translateX(-20px); }
-    50%  { transform: translateX(20px); }
+    50%  { transform: translateX(20px);  }
     100% { transform: translateX(-20px); }
   }
 
   /* メイン */
   #app {
-    position: relative;
-    z-index: 1;
-    max-width: 540px;
-    margin: 0 auto;
-    padding: 16px;
+    position: relative; z-index: 1;
+    max-width: 540px; margin: 0 auto; padding: 16px;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex; flex-direction: column; align-items: center;
   }
 
   h1 {
     font-family: 'Fredoka One', cursive;
-    font-size: 2rem;
-    color: #1a237e;
-    text-align: center;
+    font-size: 2rem; color: #1a237e; text-align: center;
     text-shadow: 3px 3px 0 rgba(255,255,255,0.8);
-    margin-bottom: 4px;
-    letter-spacing: 2px;
+    margin-bottom: 4px; letter-spacing: 2px;
   }
-  .subtitle {
-    font-size: 0.85rem;
-    color: #37474f;
-    text-align: center;
-    margin-bottom: 16px;
-  }
+  .subtitle { font-size: 0.85rem; color: #37474f; text-align: center; margin-bottom: 16px; }
 
-  /* スコアバー */
-  #scorebar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(255,255,255,0.85);
-    border-radius: 50px;
-    padding: 8px 20px;
-    margin-bottom: 18px;
-    box-shadow: 0 3px 12px var(--shadow);
-  }
-  .score-item { display: flex; align-items: center; gap: 6px; }
-  .score-label { font-size: 0.75rem; color: #546e7a; }
-  .score-val { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: #1565C0; }
-  .streak-val { color: #E53935; }
-  .q-val { color: #4CAF50; }
-
-  /* 難易度選択 */
+  /* ===== レベル選択 ===== */
   #level-screen {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
+    width: 100%; display: flex; flex-direction: column;
+    align-items: center; gap: 14px;
     animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
   }
-  .level-title { font-size: 1.2rem; color: #37474f; margin-bottom: 4px; }
+  .level-title { font-size: 1.1rem; color: #37474f; margin-bottom: 4px; }
   .level-btn {
-    width: 90%;
-    padding: 18px;
-    border: none;
-    border-radius: 20px;
-    font-family: 'Kosugi Maru', sans-serif;
-    font-size: 1.1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 14px;
+    width: 90%; padding: 18px; border: none; border-radius: 20px;
+    font-family: 'Kosugi Maru', sans-serif; font-size: 1.1rem;
+    cursor: pointer; display: flex; align-items: center; gap: 14px;
     box-shadow: 0 5px 15px var(--shadow);
     transition: transform 0.15s, box-shadow 0.15s;
   }
   .level-btn:hover  { transform: scale(1.04); box-shadow: 0 8px 20px var(--shadow); }
   .level-btn:active { transform: scale(0.97); }
   .level-btn .lv-icon { font-size: 2.2rem; }
-  .level-btn .lv-info .lv-name { font-size: 1.2rem; font-weight: bold; }
-  .level-btn .lv-info .lv-desc { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+  .lv-name { font-size: 1.2rem; font-weight: bold; }
+  .lv-desc { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+  .lv-count {
+    margin-top: 5px;
+    display: inline-block;
+    font-size: 0.8rem;
+    background: rgba(255,255,255,0.55);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-weight: bold;
+  }
   .lv-easy   { background: linear-gradient(135deg, #c8e6c9, #a5d6a7); color: #1b5e20; }
   .lv-normal { background: linear-gradient(135deg, #bbdefb, #90caf9); color: #0d47a1; }
   .lv-hard   { background: linear-gradient(135deg, #f8bbd0, #f48fb1); color: #880e4f; }
 
-  /* ゲーム画面 */
-  #game-screen {
-    width: 100%;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
+  /* ===== もんだいすう選択 ===== */
+  #mode-screen {
+    width: 100%; display: none; flex-direction: column;
+    align-items: center; gap: 16px;
+    animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
   }
+  .mode-title { font-size: 1.1rem; color: #37474f; text-align: center; }
+  .mode-btn {
+    width: 80%; padding: 20px 14px; border: none; border-radius: 20px;
+    font-family: 'Kosugi Maru', sans-serif; font-size: 1.05rem;
+    cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;
+    box-shadow: 0 5px 15px var(--shadow);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .mode-btn:hover  { transform: scale(1.04); box-shadow: 0 8px 20px var(--shadow); }
+  .mode-btn:active { transform: scale(0.97); }
+  .mode-btn .m-icon { font-size: 2rem; }
+  .mode-btn .m-name { font-size: 1.2rem; font-weight: bold; }
+  .mode-btn .m-desc { font-size: 0.8rem; opacity: 0.8; }
+  .mode-random { background: linear-gradient(135deg, #fff9c4, #ffe082); color: #5d4037; }
+  .mode-all    { background: linear-gradient(135deg, #e1bee7, #ce93d8); color: #4a148c; }
+  .back-link {
+    font-size: 0.9rem; color: #546e7a; cursor: pointer;
+    text-decoration: underline; text-underline-offset: 3px;
+    background: none; border: none; font-family: 'Kosugi Maru', sans-serif;
+    margin-top: 4px;
+  }
+  .back-link:hover { color: #1565C0; }
+
+  /* ===== ゲーム画面 ===== */
+  #game-screen {
+    width: 100%; display: none; flex-direction: column;
+    align-items: center; gap: 14px;
+  }
+
+  /* 問題カウンター */
+  #q-counter {
+    font-size: 0.9rem; color: #546e7a; text-align: center;
+    background: rgba(255,255,255,0.8);
+    border-radius: 50px; padding: 4px 18px;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  #q-counter span { font-family: 'Fredoka One', cursive; font-size: 1.1rem; color: #1565C0; }
 
   /* プログレスバー */
   #progress-wrap {
-    width: 100%;
-    background: rgba(255,255,255,0.7);
-    border-radius: 50px;
-    height: 12px;
-    overflow: hidden;
+    width: 100%; background: rgba(255,255,255,0.7);
+    border-radius: 50px; height: 12px; overflow: hidden;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
   }
   #progress-bar {
     height: 100%;
     background: linear-gradient(90deg, #42a5f5, #1565C0);
-    border-radius: 50px;
-    transition: width 0.4s ease;
+    border-radius: 50px; transition: width 0.4s ease;
   }
 
   /* 国旗カード */
   #flag-card {
-    width: 100%;
-    background: white;
-    border-radius: 24px;
+    width: 100%; background: white; border-radius: 24px;
     box-shadow: 0 6px 24px var(--shadow);
     padding: 20px 20px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
   }
   .flag-label { font-size: 0.85rem; color: #78909c; }
-
-  /* 国旗絵文字 — 切れないようにoverflow非表示・固定サイズなし */
   #flag-display {
-    font-size: 7rem;
-    line-height: 1.1;
-    /* 絵文字がどの環境でも完全に表示されるよう padding を確保 */
-    padding: 8px 12px;
-    border-radius: 16px;
-    border: 3px solid #e0e0e0;
-    background: #fafafa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* overflow:hidden は使わない */
+    font-size: 7rem; line-height: 1.1;
+    padding: 8px 12px; border-radius: 16px;
+    border: 3px solid #e0e0e0; background: #fafafa;
+    display: flex; align-items: center; justify-content: center;
   }
   #flag-display.bounce { animation: bounce 0.4s cubic-bezier(0.34,1.56,0.64,1); }
 
   /* 選択肢 */
   #choices {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    width: 100%; display: grid;
+    grid-template-columns: 1fr 1fr; gap: 12px;
   }
   .choice-btn {
-    padding: 16px 10px;
-    border: 3px solid #e0e0e0;
-    border-radius: 18px;
-    background: white;
-    font-family: 'Kosugi Maru', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    box-shadow: 0 4px 10px var(--shadow);
+    padding: 16px 10px; border: 3px solid #e0e0e0; border-radius: 18px;
+    background: white; font-family: 'Kosugi Maru', sans-serif; font-size: 1rem;
+    cursor: pointer; box-shadow: 0 4px 10px var(--shadow);
     transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
-    line-height: 1.4;
-    word-break: break-all;
+    line-height: 1.4; word-break: break-all;
   }
   .choice-btn:hover:not(:disabled) {
-    transform: scale(1.04);
-    border-color: #90caf9;
+    transform: scale(1.04); border-color: #90caf9;
     box-shadow: 0 6px 16px var(--shadow);
   }
   .choice-btn:active:not(:disabled) { transform: scale(0.97); }
   .choice-btn.correct { background: #e8f5e9; border-color: #4CAF50; animation: correctPulse 0.5s; }
-  /* 不正解は揺れのみ・色変えない */
   .choice-btn.wrong   { animation: shake 0.45s; }
 
   /* フィードバック */
   #feedback {
-    font-size: 1.5rem;
-    font-family: 'Fredoka One', cursive;
-    text-align: center;
-    min-height: 2rem;
+    font-size: 1.5rem; font-family: 'Fredoka One', cursive;
+    text-align: center; min-height: 2rem;
   }
   #feedback.correct { color: #2e7d32; }
 
   /* 次へボタン */
   #next-btn {
-    width: 80%;
-    padding: 16px;
+    width: 80%; padding: 16px;
     background: linear-gradient(135deg, #42a5f5, #1565C0);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-family: 'Kosugi Maru', sans-serif;
-    font-size: 1.1rem;
-    cursor: pointer;
-    box-shadow: 0 5px 16px rgba(21,101,192,0.35);
+    color: white; border: none; border-radius: 50px;
+    font-family: 'Kosugi Maru', sans-serif; font-size: 1.1rem;
+    cursor: pointer; box-shadow: 0 5px 16px rgba(21,101,192,0.35);
     display: none;
     animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
     transition: transform 0.15s;
@@ -244,71 +203,50 @@
   #next-btn:hover  { transform: scale(1.04); }
   #next-btn:active { transform: scale(0.97); }
 
-  /* 結果画面 */
+  /* ===== 結果画面 ===== */
   #result-screen {
-    width: 100%;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
+    width: 100%; display: none; flex-direction: column;
+    align-items: center; gap: 16px;
     animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
   }
   .result-card {
-    width: 100%;
-    background: white;
-    border-radius: 24px;
-    padding: 30px 20px;
-    box-shadow: 0 6px 24px var(--shadow);
-    text-align: center;
+    width: 100%; background: white; border-radius: 24px;
+    padding: 30px 20px; box-shadow: 0 6px 24px var(--shadow); text-align: center;
   }
   .result-emoji { font-size: 4rem; }
   .result-title { font-family: 'Fredoka One', cursive; font-size: 2rem; color: #1a237e; margin: 8px 0; }
-  .result-score { font-size: 3.5rem; font-family: 'Fredoka One', cursive; color: #E53935; }
+  .result-stars { font-size: 2.5rem; margin: 8px 0; letter-spacing: 6px; min-height: 3rem; }
+  .result-score { font-size: 2.8rem; font-family: 'Fredoka One', cursive; color: #E53935; }
   .result-sub   { font-size: 1rem; color: #546e7a; margin-top: 4px; }
-  .result-stars { font-size: 2.5rem; margin: 8px 0; letter-spacing: 6px; }
   .retry-btn {
-    width: 80%;
-    padding: 16px;
+    width: 80%; padding: 16px;
     background: linear-gradient(135deg, #66bb6a, #2e7d32);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-family: 'Kosugi Maru', sans-serif;
-    font-size: 1.1rem;
-    cursor: pointer;
-    box-shadow: 0 5px 16px rgba(46,125,50,0.35);
+    color: white; border: none; border-radius: 50px;
+    font-family: 'Kosugi Maru', sans-serif; font-size: 1.1rem;
+    cursor: pointer; box-shadow: 0 5px 16px rgba(46,125,50,0.35);
     transition: transform 0.15s;
   }
   .retry-btn:hover { transform: scale(1.04); }
-  .back-btn {
-    width: 80%;
-    padding: 14px;
-    background: white;
-    color: #546e7a;
-    border: 2px solid #cfd8dc;
-    border-radius: 50px;
-    font-family: 'Kosugi Maru', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: transform 0.15s;
+  .result-back-btn {
+    width: 80%; padding: 14px; background: white; color: #546e7a;
+    border: 2px solid #cfd8dc; border-radius: 50px;
+    font-family: 'Kosugi Maru', sans-serif; font-size: 1rem;
+    cursor: pointer; transition: transform 0.15s;
   }
-  .back-btn:hover { transform: scale(1.04); }
+  .result-back-btn:hover { transform: scale(1.04); }
 
   /* confetti */
   .confetti-piece {
-    position: fixed;
-    width: 12px; height: 12px;
-    border-radius: 2px;
+    position: fixed; width: 12px; height: 12px; border-radius: 2px;
     pointer-events: none;
-    animation: confettiFall 1.8s ease-in forwards;
-    z-index: 999;
+    animation: confettiFall 1.8s ease-in forwards; z-index: 999;
   }
   @keyframes confettiFall {
     0%   { transform: translateY(-20px) rotate(0deg);   opacity: 1; }
     100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
   }
 
-  /* 共通アニメーション */
+  /* 共通アニメ */
   @keyframes popIn {
     0%   { transform: scale(0.7); opacity: 0; }
     100% { transform: scale(1);   opacity: 1; }
@@ -318,11 +256,10 @@
     50%  { transform: scale(1.12); }
     100% { transform: scale(1);    }
   }
-  /* 揺れ：左右に4回ブルブル */
   @keyframes shake {
-    0%, 100%       { transform: translateX(0); }
+    0%, 100%       { transform: translateX(0);   }
     15%, 45%, 75%  { transform: translateX(-9px); }
-    30%, 60%, 90%  { transform: translateX(9px); }
+    30%, 60%, 90%  { transform: translateX(9px);  }
   }
   @keyframes correctPulse {
     0%   { transform: scale(1);    }
@@ -331,11 +268,8 @@
   }
 
   footer {
-    font-size: 0.7rem;
-    color: #90a4ae;
-    text-align: center;
-    margin-top: auto;
-    padding-top: 16px;
+    font-size: 0.7rem; color: #90a4ae;
+    text-align: center; margin-top: auto; padding-top: 16px;
   }
 </style>
 </head>
@@ -349,50 +283,31 @@
   <h1>🌍 こっき クイズ</h1>
   <p class="subtitle">せかいの くにの はたを おぼえよう！</p>
 
-  <!-- スコアバー -->
-  <div id="scorebar">
-    <div class="score-item">
-      <span class="score-label">⭐ スコア</span>
-      <span class="score-val" id="disp-score">0</span>
-    </div>
-    <div class="score-item">
-      <span class="score-label">🔥 れんぞく</span>
-      <span class="score-val streak-val" id="disp-streak">0</span>
-    </div>
-    <div class="score-item">
-      <span class="score-label">❓ もんだい</span>
-      <span class="score-val q-val" id="disp-q">0/10</span>
-    </div>
-  </div>
-
-  <!-- レベル選択 -->
+  <!-- ① レベル選択 -->
   <div id="level-screen">
     <p class="level-title">むずかしさを えらんでね！</p>
-    <button class="level-btn lv-easy"   onclick="startGame('easy')">
-      <span class="lv-icon">🌱</span>
-      <div class="lv-info">
-        <div class="lv-name">かんたん</div>
-        <div class="lv-desc">にほん・ちゅうごく・アメリカなど</div>
-      </div>
-    </button>
-    <button class="level-btn lv-normal" onclick="startGame('normal')">
-      <span class="lv-icon">🌍</span>
-      <div class="lv-info">
-        <div class="lv-name">ふつう</div>
-        <div class="lv-desc">ヨーロッパ・アジアのくに</div>
-      </div>
-    </button>
-    <button class="level-btn lv-hard"   onclick="startGame('hard')">
-      <span class="lv-icon">🚀</span>
-      <div class="lv-info">
-        <div class="lv-name">むずかしい</div>
-        <div class="lv-desc">アフリカ・みなみアメリカも！</div>
-      </div>
-    </button>
+    <!-- ボタンはJSで生成 -->
   </div>
 
-  <!-- ゲーム画面 -->
+  <!-- ② もんだいすう選択（20カ国以上のレベルのみ） -->
+  <div id="mode-screen">
+    <p class="mode-title" id="mode-title">もんだいすうを えらんでね！</p>
+    <button class="mode-btn mode-random" id="btn-random" onclick="startGame('random')">
+      <span class="m-icon">🎲</span>
+      <span class="m-name">10もん</span>
+      <span class="m-desc">ランダムに10もん出題</span>
+    </button>
+    <button class="mode-btn mode-all" id="btn-all" onclick="startGame('all')">
+      <span class="m-icon">📚</span>
+      <span class="m-name" id="btn-all-label">ぜんもん</span>
+      <span class="m-desc" id="btn-all-desc">全カ国を全問出題</span>
+    </button>
+    <button class="back-link" onclick="showLevelScreen()">← もどる</button>
+  </div>
+
+  <!-- ③ ゲーム画面 -->
   <div id="game-screen">
+    <div id="q-counter">もんだい <span id="disp-q">1</span> / <span id="disp-total">10</span></div>
     <div id="progress-wrap">
       <div id="progress-bar" style="width:0%"></div>
     </div>
@@ -405,24 +320,24 @@
     <button id="next-btn" onclick="nextQuestion()">つぎのもんだい ➡</button>
   </div>
 
-  <!-- 結果画面 -->
+  <!-- ④ 結果画面 -->
   <div id="result-screen">
     <div class="result-card">
       <div class="result-emoji" id="result-emoji">🎉</div>
       <div class="result-title"  id="result-title">すごい！</div>
       <div class="result-stars"  id="result-stars">⭐⭐⭐</div>
-      <div class="result-score"><span id="final-score">0</span> てん</div>
-      <div class="result-sub"    id="result-sub">10もん チャレンジ！</div>
+      <div class="result-score" id="result-score">10 / 10</div>
+      <div class="result-sub"   id="result-sub">もん せいかい！</div>
     </div>
-    <button class="retry-btn" onclick="startGame(currentLevel)">もういちど！ 🔄</button>
-    <button class="back-btn"  onclick="showLevelScreen()">☰ むずかしさをかえる</button>
+    <button class="retry-btn"      onclick="retryGame()">もういちど！ 🔄</button>
+    <button class="result-back-btn" onclick="showLevelScreen()">☰ むずかしさをかえる</button>
   </div>
 
   <footer>世界の国旗クイズ 🌏</footer>
 </div>
 
 <script>
-// ======= データ（hint プロパティは残すが表示しない） =======
+// ===== データ =====
 const FLAGS = {
   easy: [
     { emoji: '🇯🇵', name: 'にほん' },
@@ -487,211 +402,270 @@ const FLAGS = {
   ],
 };
 
-// ======= 状態 =======
-let currentLevel = 'easy';
-let questions    = [];
-let currentQ     = 0;
-let score        = 0;
-let streak       = 0;
-let correctAnswered = false; // 正解したかどうか（trueになったら次へボタン表示）
-const TOTAL = 10;
+// ===== 定数 =====
+const RANDOM_COUNT = 10; // ランダムモードの出題数
+const NEED_CHOICE  = 20; // この国数以上なら出題数を選択させる
 
-// ======= UI切替 =======
+// ===== 状態 =====
+let currentLevel  = 'easy';
+let currentMode   = 'all';   // 'random' | 'all'
+let questions     = [];
+let currentQ      = 0;
+let correctCount  = 0;
+let totalQ        = 0;
+let correctAnswered = false;
+
+// ===== 初期化：レベル選択画面を構築 =====
+function buildLevelScreen() {
+  const screen = document.getElementById('level-screen');
+  // タイトルだけ残して再構築
+  screen.innerHTML = '<p class="level-title">むずかしさを えらんでね！</p>';
+
+  const levels = [
+    { key: 'easy',   icon: '🌱', name: 'かんたん',   cls: 'lv-easy' },
+    { key: 'normal', icon: '🌍', name: 'ふつう',     cls: 'lv-normal' },
+    { key: 'hard',   icon: '🚀', name: 'むずかしい', cls: 'lv-hard' },
+  ];
+
+  levels.forEach(lv => {
+    const count = FLAGS[lv.key].length;
+    const hasChoice = count >= NEED_CHOICE;
+
+    // 出題数の説明文
+    let countNote;
+    if (hasChoice) {
+      countNote = `${count}カ国 ／ 10もん or ぜんもん えらべる`;
+    } else {
+      countNote = `${count}カ国 ／ ぜんもん（${count}もん）出題`;
+    }
+
+    const btn = document.createElement('button');
+    btn.className = `level-btn ${lv.cls}`;
+    btn.innerHTML = `
+      <span class="lv-icon">${lv.icon}</span>
+      <div class="lv-info">
+        <div class="lv-name">${lv.name}</div>
+        <div class="lv-count">${countNote}</div>
+      </div>
+    `;
+    btn.onclick = () => selectLevel(lv.key);
+    screen.appendChild(btn);
+  });
+}
+
+// ===== レベル選択 =====
+function selectLevel(level) {
+  currentLevel = level;
+  const count = FLAGS[level].length;
+
+  if (count >= NEED_CHOICE) {
+    // もんだいすう選択へ
+    document.getElementById('mode-title').textContent =
+      `「${getLevelName(level)}」は ${count}カ国あります。もんだいすうを えらんでね！`;
+    document.getElementById('btn-all-label').textContent = `ぜんもん（${count}もん）`;
+    document.getElementById('btn-all-desc').textContent  = `${count}カ国 ぜんぶ チャレンジ！`;
+    showModeScreen();
+  } else {
+    // そのまま全問スタート
+    startGame('all');
+  }
+}
+
+function getLevelName(level) {
+  return level === 'easy' ? 'かんたん' : level === 'normal' ? 'ふつう' : 'むずかしい';
+}
+
+// ===== ゲーム開始 =====
+function startGame(mode) {
+  currentMode   = mode;
+  correctCount  = 0;
+  currentQ      = 0;
+  correctAnswered = false;
+
+  const pool = [...FLAGS[currentLevel]].sort(() => Math.random() - 0.5);
+  if (mode === 'random') {
+    questions = pool.slice(0, RANDOM_COUNT);
+  } else {
+    questions = pool; // 全問
+  }
+  totalQ = questions.length;
+
+  showGameScreen();
+  renderQuestion();
+}
+
+// ===== もう一度（同じレベル・同じモード） =====
+function retryGame() {
+  startGame(currentMode);
+}
+
+// ===== UI切替 =====
 function showLevelScreen() {
   document.getElementById('level-screen').style.display  = 'flex';
+  document.getElementById('mode-screen').style.display   = 'none';
   document.getElementById('game-screen').style.display   = 'none';
   document.getElementById('result-screen').style.display = 'none';
-  updateScorebar();
+}
+function showModeScreen() {
+  document.getElementById('level-screen').style.display  = 'none';
+  document.getElementById('mode-screen').style.display   = 'flex';
+  document.getElementById('game-screen').style.display   = 'none';
+  document.getElementById('result-screen').style.display = 'none';
 }
 function showGameScreen() {
   document.getElementById('level-screen').style.display  = 'none';
+  document.getElementById('mode-screen').style.display   = 'none';
   document.getElementById('game-screen').style.display   = 'flex';
   document.getElementById('result-screen').style.display = 'none';
 }
 function showResultScreen() {
   document.getElementById('level-screen').style.display  = 'none';
+  document.getElementById('mode-screen').style.display   = 'none';
   document.getElementById('game-screen').style.display   = 'none';
   document.getElementById('result-screen').style.display = 'flex';
 }
 
-// ======= ゲーム開始 =======
-function startGame(level) {
-  currentLevel    = level;
-  score           = 0;
-  streak          = 0;
-  currentQ        = 0;
-  correctAnswered = false;
-
-  const targetPool = level === 'easy'   ? FLAGS.easy
-                   : level === 'normal' ? FLAGS.normal
-                                        : FLAGS.hard;
-  const allPool    = level === 'easy'   ? [...FLAGS.easy]
-                   : level === 'normal' ? [...FLAGS.easy, ...FLAGS.normal]
-                                        : [...FLAGS.easy, ...FLAGS.normal, ...FLAGS.hard];
-
-  const shuffled = [...targetPool].sort(() => Math.random() - 0.5);
-  questions = shuffled.slice(0, TOTAL);
-  if (questions.length < TOTAL) {
-    const extra = allPool.filter(f => !questions.includes(f)).sort(() => Math.random() - 0.5);
-    questions = [...questions, ...extra].slice(0, TOTAL);
-  }
-
-  updateScorebar();
-  showGameScreen();
-  renderQuestion();
-}
-
-// ======= 問題レンダリング =======
+// ===== 問題レンダリング =====
 function renderQuestion() {
   correctAnswered = false;
   const q = questions[currentQ];
 
-  // 国旗バウンス
+  // 問題カウンター
+  document.getElementById('disp-q').textContent     = currentQ + 1;
+  document.getElementById('disp-total').textContent  = totalQ;
+
+  // 国旗
   const flagEl = document.getElementById('flag-display');
   flagEl.textContent = q.emoji;
   flagEl.classList.remove('bounce');
   void flagEl.offsetWidth;
   flagEl.classList.add('bounce');
 
-  // フィードバック・次へ初期化
+  // フィードバック・次へ
   const fb = document.getElementById('feedback');
   fb.textContent = '';
   fb.className   = '';
   document.getElementById('next-btn').style.display = 'none';
 
-  // 選択肢生成
-  const choices = generateChoices(q);
+  // 選択肢
+  const choices   = generateChoices(q);
   const container = document.getElementById('choices');
   container.innerHTML = '';
   choices.forEach(c => {
     const btn = document.createElement('button');
     btn.className   = 'choice-btn';
     btn.textContent = c.name;
-    btn.dataset.name = c.name;
-    btn.onclick = () => checkAnswer(btn, c.name === q.name, q.name);
+    btn.onclick = () => checkAnswer(btn, c.name === q.name);
     container.appendChild(btn);
   });
 
   updateProgress();
-  updateScorebar();
 }
 
-// ======= 選択肢生成 =======
+// ===== 選択肢生成（同レベルのプールのみ） =====
 function generateChoices(q) {
-  const allFlags = [...FLAGS.easy, ...FLAGS.normal, ...FLAGS.hard];
-  const others   = allFlags.filter(f => f.name !== q.name).sort(() => Math.random() - 0.5).slice(0, 3);
+  const pool   = FLAGS[currentLevel];
+  const others = pool.filter(f => f.name !== q.name)
+                     .sort(() => Math.random() - 0.5)
+                     .slice(0, 3);
+  // プールが3未満なら他レベルから補充
+  if (others.length < 3) {
+    const all = [...FLAGS.easy, ...FLAGS.normal, ...FLAGS.hard];
+    const extra = all.filter(f => f.name !== q.name && !others.find(o => o.name === f.name))
+                     .sort(() => Math.random() - 0.5)
+                     .slice(0, 3 - others.length);
+    others.push(...extra);
+  }
   return [q, ...others].sort(() => Math.random() - 0.5);
 }
 
-// ======= 答えチェック =======
-function checkAnswer(btn, isCorrect, correctName) {
-  // 正解済みなら無視
+// ===== 答えチェック =====
+function checkAnswer(btn, isCorrect) {
   if (correctAnswered) return;
 
   const fb = document.getElementById('feedback');
 
   if (isCorrect) {
-    // --- 正解 ---
     correctAnswered = true;
+    correctCount++;
     btn.classList.add('correct');
-
-    // 全ボタン無効化
     document.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
 
-    streak++;
-    const bonus = streak >= 3 ? Math.floor(streak / 3) : 0;
-    const pts   = 10 + bonus * 5;
-    score += pts;
-
     const msgs = ['⭕ せいかい！', '🎉 やった！', '✨ すごい！', '👏 ピンポン！'];
-    fb.textContent = msgs[Math.floor(Math.random() * msgs.length)] + (bonus > 0 ? ` +${pts}てん🔥` : '');
+    fb.textContent = msgs[Math.floor(Math.random() * msgs.length)];
     fb.className   = 'correct';
 
     launchConfetti();
-    updateScorebar();
     document.getElementById('next-btn').style.display = 'block';
 
   } else {
-    // --- 不正解：揺れだけ、答えは出さず、再選択可能 ---
-    streak = 0;
-    updateScorebar();
-
-    // 揺れアニメーション（クラスを付けて終わったら外す）
+    // 揺れだけ・再選択可能
     btn.classList.remove('wrong');
-    void btn.offsetWidth; // reflow
+    void btn.offsetWidth;
     btn.classList.add('wrong');
     btn.addEventListener('animationend', () => btn.classList.remove('wrong'), { once: true });
 
-    // 短いフィードバック（答えは出さない）
     fb.textContent = 'もういちど！';
     fb.className   = '';
-    // 少し経ったら消す
-    setTimeout(() => {
-      if (!correctAnswered) { fb.textContent = ''; }
-    }, 800);
+    setTimeout(() => { if (!correctAnswered) fb.textContent = ''; }, 800);
   }
 }
 
-// ======= 次の問題 =======
+// ===== 次の問題 =====
 function nextQuestion() {
   currentQ++;
-  if (currentQ >= TOTAL) {
+  if (currentQ >= totalQ) {
     showResult();
   } else {
     renderQuestion();
   }
 }
 
-// ======= 結果 =======
+// ===== 結果 =====
 function showResult() {
+  const pct = correctCount / totalQ;
   let emoji, title, stars;
-  if (score >= 120)     { emoji = '🏆'; title = 'かんぺき！';   stars = '⭐⭐⭐'; }
-  else if (score >= 80) { emoji = '🎉'; title = 'すごい！';     stars = '⭐⭐✨'; }
-  else if (score >= 50) { emoji = '😊'; title = 'よくできた！'; stars = '⭐✨✨'; }
-  else                  { emoji = '🌱'; title = 'もういちど！'; stars = '✨✨✨'; }
+  if (pct === 1)        { emoji = '🏆'; title = 'かんぺき！';   stars = '⭐⭐⭐'; }
+  else if (pct >= 0.8)  { emoji = '🎉'; title = 'すごい！';     stars = '⭐⭐'; }
+  else if (pct >= 0.6)  { emoji = '😊'; title = 'よくできた！'; stars = '⭐'; }
+  else                  { emoji = '🌱'; title = 'もういちど！'; stars = ''; }
 
   document.getElementById('result-emoji').textContent = emoji;
   document.getElementById('result-title').textContent = title;
   document.getElementById('result-stars').textContent = stars;
-  document.getElementById('final-score').textContent  = score;
-  document.getElementById('result-sub').textContent   = `${TOTAL}もん チャレンジ！`;
+  document.getElementById('result-score').textContent = `${correctCount} / ${totalQ}`;
+  document.getElementById('result-sub').textContent   = 'もん せいかい！';
 
   showResultScreen();
-  if (score >= 80) launchConfetti(30);
+  if (pct >= 0.8) launchConfetti(30);
 }
 
-// ======= スコアバー更新 =======
-function updateScorebar() {
-  document.getElementById('disp-score').textContent  = score;
-  document.getElementById('disp-streak').textContent = streak;
-  document.getElementById('disp-q').textContent      = `${currentQ}/${TOTAL}`;
-}
-
-// ======= プログレスバー =======
+// ===== プログレスバー =====
 function updateProgress() {
-  document.getElementById('progress-bar').style.width = (currentQ / TOTAL * 100) + '%';
+  document.getElementById('progress-bar').style.width = (currentQ / totalQ * 100) + '%';
 }
 
-// ======= 紙吹雪 =======
+// ===== 紙吹雪 =====
 function launchConfetti(count = 18) {
   const colors = ['#ff6b6b','#ffd93d','#6bcb77','#4d96ff','#ff6bd6','#ffb347'];
   for (let i = 0; i < count; i++) {
     setTimeout(() => {
       const el = document.createElement('div');
       el.className = 'confetti-piece';
-      el.style.left             = Math.random() * 100 + 'vw';
-      el.style.top              = '-20px';
-      el.style.background       = colors[Math.floor(Math.random() * colors.length)];
-      el.style.transform        = `rotate(${Math.random()*360}deg)`;
+      el.style.left              = Math.random() * 100 + 'vw';
+      el.style.top               = '-20px';
+      el.style.background        = colors[Math.floor(Math.random() * colors.length)];
+      el.style.transform         = `rotate(${Math.random()*360}deg)`;
       el.style.animationDuration = (1.2 + Math.random() * 0.8) + 's';
-      el.style.animationDelay   = (Math.random() * 0.5) + 's';
+      el.style.animationDelay    = (Math.random() * 0.5) + 's';
       document.body.appendChild(el);
       setTimeout(() => el.remove(), 2500);
     }, i * 40);
   }
 }
 
-// ======= 初期化 =======
+// ===== 起動 =====
+buildLevelScreen();
 showLevelScreen();
 </script>
 </body>
